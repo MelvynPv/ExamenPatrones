@@ -1,6 +1,5 @@
 ﻿using ExamenPatrones.CostoDistancia.Interfaces;
 using ExamenPatrones.Distancia.Interfaces;
-using System;
 
 namespace ExamenPatrones.CostoDistancia
 {
@@ -11,12 +10,15 @@ namespace ExamenPatrones.CostoDistancia
         public string PrefijoMoneda { get; }
         public ITipoDistancia TipoDistancia { get; }
 
-        protected CostoMoneda(ITipoDistancia tipoDistancia, string prefijoMoneda) 
+        protected CostoMoneda(ITipoDistancia tipoDistancia, string prefijoMoneda)
         {
             TipoDistancia = tipoDistancia;
             PrefijoMoneda = prefijoMoneda;
         }
 
-        public abstract decimal CostoTotal(int unidadDistancia);
+        public decimal CostoTotal() 
+        {
+            return TipoDistancia.UnidadDistancia * CostoPorUnidadDistancia;
+        }
     }
 }

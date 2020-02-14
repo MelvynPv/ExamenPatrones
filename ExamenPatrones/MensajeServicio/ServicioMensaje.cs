@@ -1,8 +1,9 @@
-﻿using ExamenPatrones.Empresas.Factories.Interfaces;
+﻿using ExamenPatrones.CreadorMensajes.Directores;
+using ExamenPatrones.Empresas.Factories.Interfaces;
 using ExamenPatrones.Empresas.Interfaces;
+using ExamenPatrones.FormatoTiempo.Factories.Interfaces;
+using ExamenPatrones.FormatoTiempo.Interfaces;
 using ExamenPatrones.Lectores;
-using ExamenPatrones.MediosTrasporte.Interfaces;
-using ExamenPatrones.ValidacionEnCadena.Servicio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,13 +14,19 @@ namespace ExamenPatrones.MensajeServicio
     {
         private readonly ILectorArchivoPedido lectorArchivoPedido;
         private readonly ISucursalEmpresaPaqueteriaFactory sucursal;
+        private readonly DateTime tiempoActual;
+        private readonly IFormatosTiempoEspecificos formatosTiempoEspecificos;
 
         public ServicioMensaje(
             ILectorArchivoPedido lectorArchivoPedido,
-            ISucursalEmpresaPaqueteriaFactory sucursal)
+            ISucursalEmpresaPaqueteriaFactory sucursal,
+            DateTime tiempoActual,
+            IFormatosTiempoEspecificos formatosTiempoEspecificos)
         {
             this.lectorArchivoPedido = lectorArchivoPedido;
             this.sucursal = sucursal;
+            this.tiempoActual = tiempoActual;
+            this.formatosTiempoEspecificos = formatosTiempoEspecificos;
         }
 
         public string ObtenerRespuesta()
@@ -33,8 +40,9 @@ namespace ExamenPatrones.MensajeServicio
                 try
                 {
                     empresaPaqueteria = sucursal.ObtenerEmpresa(pedido.PaqueteriaCadena);
-                    IMedioTransporte medioTransporte = empresaPaqueteria.ObtenerMedioDeTransporte(pedido.TransporteCadena.ToLower());
-
+                    IFormatoTiempo formatoTiempo = formatosTiempoEspecificos.ObtenerFormatoTiempo(tiempoActual, pedido.FechaPedido);
+                    string mensaje = new CreadorMensajeEntregado(empresaPaqueteria, formatoTiempo).CrearMensajeEntregado(pedido, true);
+                    stringBuilder.AppendLine(mensaje);
 
                 }
                 catch (Exception err)
@@ -42,8 +50,8 @@ namespace ExamenPatrones.MensajeServicio
                     stringBuilder.AppendLine(err.Message);
                 }
             }
-
             return stringBuilder.ToString();
         }
+
     }
 }

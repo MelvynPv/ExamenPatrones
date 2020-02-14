@@ -5,15 +5,15 @@ namespace ExamenPatrones.MediosTrasporte.Factories
     public class TrenFactory : TransportesFactory
     {
 
-        public TrenFactory(ICostoDistancia costoDistancia)
-            : base(costoDistancia)
+        public TrenFactory(ICostoDistancia costoDistancia, int velocidad)
+            : base(costoDistancia, velocidad)
         {
         }
         protected override void InicializarTransporte()
         {
             if (Transporte == null)
             {
-                Transporte = new Tren
+                Transporte = new Tren(VelocidadTransporte)
                 {
                     CostoDistancia = _costoDistancia
                 };

@@ -21,8 +21,8 @@ namespace ExamenPatrones.Empresas.Factories
 
             foreach (ICostoDistancia costo in CostosPorDistanciaDisponiblesEmpresa())
             {
-                medioTransportes.Add(new BarcoFactory(costo));
-                medioTransportes.Add(new AvionFactory(costo));
+                medioTransportes.Add(new BarcoFactory(costo,46));
+                medioTransportes.Add(new AvionFactory(costo,600));
             }
 
             return medioTransportes;

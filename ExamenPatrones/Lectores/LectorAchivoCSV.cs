@@ -8,7 +8,7 @@ namespace ExamenPatrones.Lectores
         public List<PeticionPedido> LeerArchivo()
         {
             List<PeticionPedido> pedidosEntity = new List<PeticionPedido>();
-            string[] pedidos = System.IO.File.ReadAllLines(@"..\Archivos\pedidos.txt");
+            string[] pedidos = System.IO.File.ReadAllLines(@"..\..\..\Archivos\pedidos.txt");
 
             foreach (string pedido in pedidos)
             {

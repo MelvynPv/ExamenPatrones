@@ -1,8 +1,9 @@
 ﻿using ExamenPatrones.Empresas.Factories.Interfaces;
+using ExamenPatrones.FormatoTiempo.Factories;
+using ExamenPatrones.FormatoTiempo.Factories.Interfaces;
 using ExamenPatrones.Lectores;
 using ExamenPatrones.MensajeServicio;
-using ExamenPatrones.ValidacionEnCadena.Servicio;
-using ExamenPatrones.ValidacionEnCadena.Servicio.Interfaces;
+using System;
 
 namespace ExamenPatrones
 {
@@ -11,14 +12,15 @@ namespace ExamenPatrones
         static void Main(string[] args)
         {
             ILectorArchivoPedido lector = new LectorAchivoCSV();
-            IValidadorPedido validadorPedido = new ValidadorEnpresaTransporte();
             ISucursalEmpresaPaqueteriaFactory sucursal = new MeridaNorteI();
+            DateTime fechaActual = DateTime.Now;
+            IFormatosTiempoEspecificos formatosTiempoEspecifico = new FormatosTiempoFactory();
 
-            ServicioMensaje servicioMensaje = new ServicioMensaje(
-                lector,
-                sucursal);
+            ServicioMensaje servicioMensaje = new ServicioMensaje(lector, sucursal, fechaActual, formatosTiempoEspecifico);
 
-            servicioMensaje.ObtenerRespuesta();
+            string respuesta = servicioMensaje.ObtenerRespuesta();
+
+            Console.WriteLine(respuesta);
         }
     }
 }

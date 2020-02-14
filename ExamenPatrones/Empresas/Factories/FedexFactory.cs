@@ -1,4 +1,5 @@
-﻿using ExamenPatrones.CostoDistancia.Interfaces;
+﻿using ExamenPatrones.CostoDistancia;
+using ExamenPatrones.CostoDistancia.Interfaces;
 using ExamenPatrones.Distancia;
 using ExamenPatrones.Distancia.Interfaces;
 using ExamenPatrones.MediosTrasporte.Factories;
@@ -39,7 +40,7 @@ namespace ExamenPatrones.Empresas.Factories
 
             foreach (ICostoDistancia costo in CostosPorDistanciaDisponiblesEmpresa())
             {
-                medioTransportes.Add(new BarcoFactory(costo));
+                medioTransportes.Add(new BarcoFactory(costo,46));
             }
 
             return medioTransportes;

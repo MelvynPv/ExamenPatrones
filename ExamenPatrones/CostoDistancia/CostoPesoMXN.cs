@@ -10,15 +10,5 @@ namespace ExamenPatrones.CostoDistancia
         {
 
         }
-
-        public override decimal CostoTotal(int unidadDistancia)
-        {
-            return unidadDistancia * CostoPorUnidadDistancia;
-        }
-
-        //public override string ToString()
-        //{
-        //    return string.Format("costo de {0}{1}",PrefijoMoneda, CostoTotal());
-        //}
     }
 }

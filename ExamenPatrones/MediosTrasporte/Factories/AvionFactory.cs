@@ -4,8 +4,8 @@ namespace ExamenPatrones.MediosTrasporte.Factories
 {
     public class AvionFactory : TransportesFactory
     {
-        public AvionFactory(ICostoDistancia costoDistancia)
-            : base(costoDistancia)
+        public AvionFactory(ICostoDistancia costoDistancia, int velocidad)
+            : base(costoDistancia, velocidad)
         {
         }
 
@@ -13,7 +13,7 @@ namespace ExamenPatrones.MediosTrasporte.Factories
         {
             if (Transporte == null)
             {
-                Transporte = new Avion
+                Transporte = new Avion(VelocidadTransporte)
                 {
                     CostoDistancia = _costoDistancia
                 };

@@ -43,8 +43,8 @@ namespace ExamenPatrones.Empresas.Factories
 
             foreach (ICostoDistancia costo in CostosPorDistanciaDisponiblesEmpresa())
             {
-                medioTransportes.Add(new BarcoFactory(costo));
-                medioTransportes.Add(new TrenFactory(costo));
+                medioTransportes.Add(new BarcoFactory(costo,46));
+                medioTransportes.Add(new TrenFactory(costo,80));
             }
 
             return medioTransportes;

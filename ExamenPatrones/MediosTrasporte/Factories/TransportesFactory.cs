@@ -8,9 +8,12 @@ namespace ExamenPatrones.MediosTrasporte.Factories
     {
         protected readonly ICostoDistancia _costoDistancia;
         protected IMedioTransporte Transporte { get; set; }
-        protected TransportesFactory(ICostoDistancia costoDistancia)
+        public int VelocidadTransporte { get; }
+
+        protected TransportesFactory(ICostoDistancia costoDistancia, int velocidad)
         {
             _costoDistancia = costoDistancia;
+            VelocidadTransporte = velocidad;
         }
         public IMedioTransporte CrearTransporte() 
         {
